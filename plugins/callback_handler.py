@@ -13,9 +13,9 @@ ads = d_directory()
 @Client.on_callback_query(filters.regex(r'^progress$'))
 async def ytdl_progress(bot, cb: CallbackQuery):
     for path, dirs, files in os.walk(d_directory):
-	for f in files:
-		fp = os.path.join(path, f)
-		smze += os.path.getsize(fp)
+        for f in files:
+	    fp = os.path.join(path, f)
+	    smze += os.path.getsize(fp)
     print(smze)
     sio = humanbytes(smze)
     await cb.answer(f"Downloaded : {sio}", True)
