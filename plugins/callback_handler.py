@@ -1,5 +1,6 @@
 import asyncio
 import os
+import pyrogram
 from pyrogram import Client, filters
 from pyrogram.types import CallbackQuery
 from helper_funcs.display_progress import humanbytes
