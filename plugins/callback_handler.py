@@ -11,19 +11,23 @@ if bool(os.environ.get("WEBHOOK", False)):
 else:
     from config import Config
 
-'''d_directory = Config.DOWNLOAD_LOCATION + '/' + str(update.message_id)
 smze = 0
 
 
-ads = d_directory()
-@Client.on_callback_query(filters.regex(r'^progress$'))
-async def ytdl_progress(bot, cb: CallbackQuery):
-    for path, dirs, files in os.walk(d_directory):
+async def ytdl_progress(bot, update):
+    d_directory = Config.DOWNLOAD_LOCATION + '/' + str(update.message.message_id)
+    try:
+      for path, dirs, files in os.walk(d_directory):
         for f in files:
           fp = os.path.join(path, f)
           smze += os.path.getsize(fp)
-    
+        
+      await bot.answer(f"Downloaded : {sio}", True)
+    except exception as er:
+      await bot.answer(f'Error : {er})
+      print(er)
+      pass
     print(smze)
     sio = humanbytes(smze)
-    await cb.answer(f"Downloaded : {sio}", True)
-'''
+    await bot.answer(f"Downloaded : {sio}", True)
+
