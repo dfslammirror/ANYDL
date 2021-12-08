@@ -101,12 +101,7 @@ async def youtube_dl_call_back(bot, update):
                 o = entity.offset
                 l = entity.length
                 youtube_dl_url = youtube_dl_url[o:o + l]
-    await bot.edit_message_text(
-        text=Translation.DOWNLOAD_START,
-        chat_id=update.message.chat.id,
-        reply_markup=InlineKeyboardMarkup([ [InlineKeyboardButton("Check Progress", callback_data='progress')], ]),
-        message_id=update.message.message_id
-    )
+
     description = Translation.CUSTOM_CAPTION_UL_FILE
     if "fulltitle" in response_json:
         description = response_json["fulltitle"][0:1021]
@@ -114,6 +109,25 @@ async def youtube_dl_call_back(bot, update):
     tmp_directory_for_each_user = Config.DOWNLOAD_LOCATION + "/" + str(update.message_id)
     if not os.path.isdir(tmp_directory_for_each_user):
         os.makedirs(tmp_directory_for_each_user)
+    
+    await bot.edit_message_text(
+        text=Translation.DOWNLOAD_START,
+        chat_id=update.message.chat.id,
+        reply_markup=InlineKeyboardMarkup([ [InlineKeyboardButton("Check Progress", callback_data=f'{tmp_directory_for_each_user}')], ]),
+        message_id=update.message.message_id
+    )
+    
+    @Client.on_callback_query(filters.regex(f'^{tmp_directory_for_each_user}$'))
+    async def ytdl_progress(bot, cb: CallbackQuery):
+      for path, dirs, files in os.walk(tmp_directory_for_each_user):
+          for f in files:
+            fp = os.path.join(path, f)
+            smze += os.path.getsize(fp)
+    
+    print(smze)
+    sio = humanbytes(smze)
+    await cb.answer(f"Downloaded : {sio}", True)
+    
     download_directory = tmp_directory_for_each_user + "/" + custom_file_name
     command_to_exec = []
     if tg_send_type == "audio":
