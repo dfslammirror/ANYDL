@@ -11,7 +11,7 @@ if bool(os.environ.get("WEBHOOK", False)):
 else:
     from config import Config
 
-d_directory = Config.DOWNLOAD_LOCATION + '/' + str(update.message_id)
+'''d_directory = Config.DOWNLOAD_LOCATION + '/' + str(update.message_id)
 smze = 0
 
 
@@ -26,3 +26,4 @@ async def ytdl_progress(bot, cb: CallbackQuery):
     print(smze)
     sio = humanbytes(smze)
     await cb.answer(f"Downloaded : {sio}", True)
+'''
