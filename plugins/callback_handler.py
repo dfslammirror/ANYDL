@@ -11,11 +11,11 @@ if bool(os.environ.get("WEBHOOK", False)):
 else:
     from config import Config
 
-smze = 0
-
 
 async def ytdl_progress(bot, update):
     d_directory = Config.DOWNLOAD_LOCATION + '/' + str(update.message.message_id)
+    print(d_directory)
+    smze = 0
     try:
       for path, dirs, files in os.walk(d_directory):
         for f in files:
