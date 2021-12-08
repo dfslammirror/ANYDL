@@ -115,7 +115,7 @@ async def youtube_dl_call_back(bot, update):
     await bot.edit_message_text(
         text=Translation.DOWNLOAD_START,
         chat_id=update.message.chat.id,
-        reply_markup=InlineKeyboardMarkup([ [InlineKeyboardButton("Check Progress", callback_data=f'{tmp_directory_for_each_user}')], ]),
+        reply_markup=InlineKeyboardMarkup([ [InlineKeyboardButton("Check Progress", callback_data=f'progress')], ]),
         message_id=update.message.message_id
     )
     
