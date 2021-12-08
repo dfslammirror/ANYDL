@@ -107,7 +107,7 @@ async def youtube_dl_call_back(bot, update):
     if "fulltitle" in response_json:
         description = response_json["fulltitle"][0:1021]
         # escape Markdown and special characters
-    tmp_directory_for_each_user = Config.DOWNLOAD_LOCATION + "/" + str(update.message.chat.id)
+    tmp_directory_for_each_user = Config.DOWNLOAD_LOCATION + "/" + str(update.message.message_id)
     smze = 0
     if not os.path.isdir(tmp_directory_for_each_user):
         os.makedirs(tmp_directory_for_each_user)
@@ -118,17 +118,6 @@ async def youtube_dl_call_back(bot, update):
         reply_markup=InlineKeyboardMarkup([ [InlineKeyboardButton("Check Progress", callback_data=f'{tmp_directory_for_each_user}')], ]),
         message_id=update.message.message_id
     )
-    
-    @Client.on_callback_query(filters.regex(f'^{tmp_directory_for_each_user}$'))
-    async def ytdl_progress(bot, cb: CallbackQuery):
-      for path, dirs, files in os.walk(tmp_directory_for_each_user):
-          for f in files:
-            fp = os.path.join(path, f)
-            smze += os.path.getsize(fp)
-    
-    print(smze)
-    sio = humanbytes(smze)
-    await cb.answer(f"Downloaded : {sio}", True)
     
     download_directory = tmp_directory_for_each_user + "/" + custom_file_name
     command_to_exec = []
