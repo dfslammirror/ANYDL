@@ -27,7 +27,7 @@ async def ytdl_progress(bot, update):
             sio = humanbytes(smze)
       except:
         pass
-        print(sio)
+    print(sio)
     return sio
     
         
