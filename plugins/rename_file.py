@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # (c) Shrimadhav U K
 
+'''
 # the logging things
 import logging
 logging.basicConfig(level=logging.DEBUG,
@@ -144,3 +145,4 @@ async def rename_doc(bot, update):
             text=Translation.REPLY_TO_DOC_FOR_RENAME_FILE,
             reply_to_message_id=update.message_id
         )
+'''
