@@ -12,7 +12,7 @@ else:
     from config import Config
 
 @pyrogram.Client.on_callback_query(filters.regex(r'^progress$'))
-async def ytdl_progress(bot, cb: CallbackQuery):
+async def ytdl_progress(bot, cb: CallbackQuery, update):
     d_directory = Config.DOWNLOAD_LOCATION + '/' + str(update.message.message_id)
     print(d_directory)
     smze = 0
@@ -28,7 +28,8 @@ async def ytdl_progress(bot, cb: CallbackQuery):
             siio = f"Downloaded : {sio}"
       except:
         pass
-    await cb.answer(siio)
+    #await cb.answer(siio)
+    await cb.answer(f'How it is going!')
     print(sio, siio)
     #return sio
     
