@@ -82,8 +82,9 @@ async def trim_video(bot, update):
             end_time=int(text2[1])
             f_name = the_real_download_location.rsplit('/',1)[-1]
             video_file_location = f_name+'trimmed.mp4'
-            clip = VideoFileClip(the_real_download_location).subclip(start_time, end_time)
-            clip.write_videofile(video_file_location)
+            ffmpeg_extract_subclip("the_real_download_location",  text2[0],  text2[1],  targetname="video_file_location")
+            #clip = VideoFileClip(the_real_download_location).subclip(start_time, end_time)
+            #clip.write_videofile(video_file_location)
             logger.info(video_file_location)
             # get the correct width, height, and duration for videos greater than 10MB
             # ref: message from @BotSupport
