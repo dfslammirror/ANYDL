@@ -25,7 +25,8 @@ async def ytdl_progress(bot, update):
             fp = os.path.join(path, f)
             smze += os.path.getsize(fp)
             sio = humanbytes(smze)
-    
+      except:
+        pass
     return sio
     
         
