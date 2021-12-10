@@ -46,7 +46,7 @@ async def convert_to_audio(bot, update):
       
 @pyrogram.Client.on_message(pyrogram.Filters.command(["trim1"]))
 async def trim_video(bot, update):
-    text=update.text
+    text_=update.text
     
     TRChatBase(update.from_user.id, update.text, "c2a")
     if (update.reply_to_message is not None) and (update.reply_to_message.media is not None) :
@@ -75,7 +75,7 @@ async def trim_video(bot, update):
             )
             # don't care about the extension
             # convert video to audio format
-            text = message.text.split(" ", 1)[1]
+            text = text_.split(" ", 1)[1]
             text2=text.split(':')
             print(text2[1], text2[0])
             start_time=int(text2[0])
