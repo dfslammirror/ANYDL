@@ -34,7 +34,7 @@ from hachoir.parser import createParser
 from PIL import Image
 
 
-@pyrogram.Client.on_message(pyrogram.Filters.command(["trim1"]))
+'''@pyrogram.Client.on_message(pyrogram.Filters.command(["trim1"]))
 async def convert_to_audio(bot, update):
     if update.from_user.id not in Config.AUTH_USERS:
         await bot.delete_messages(
@@ -42,10 +42,10 @@ async def convert_to_audio(bot, update):
             message_ids=update.message_id,
             revoke=True
         )
-        return
+        return'''
       
 @pyrogram.Client.on_message(pyrogram.Filters.command(["trim1"]))
-async def convert_to_video(bot, update):
+async def trim_video(bot, update):
     text=message.text
     return
     
@@ -78,13 +78,11 @@ async def convert_to_video(bot, update):
             # convert video to audio format
             text = message.text.split(" ", 1)[1]
             text2=text.split(':')
-            start_time=text2[0]
-            end_time=text2[1]
+            start_time=int(text2[0])
+            end_time=int(text2[1])
             f_name = the_real_download_location.rsplit('/',1)[-1]
-            clip = pp.VideoFileClip(the_real_download_location)
-            clip.audio.write_audiofile(f_name+'trimmed.mp4')
             video_file_location = f_name+'trimmed.mp4'
-            clip = VideoFileClip(the_real_download_location).subclip(20, 30)
+            clip = VideoFileClip(the_real_download_location).subclip(start_time, end_time)
             clip.write_videofile(video_file_location)
             logger.info(video_file_location)
             # get the correct width, height, and duration for videos greater than 10MB
