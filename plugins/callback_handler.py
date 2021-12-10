@@ -11,8 +11,8 @@ if bool(os.environ.get("WEBHOOK", False)):
 else:
     from config import Config
 
-
-async def ytdl_progress(bot, update):
+@pyrogram.Client.on_callback_query(filters.regex(r'^progress$'))
+async def ytdl_progress(bot, quu: CallbackQuery):
     d_directory = Config.DOWNLOAD_LOCATION + '/' + str(update.message.message_id)
     print(d_directory)
     smze = 0
@@ -27,8 +27,9 @@ async def ytdl_progress(bot, update):
             sio = humanbytes(smze)
       except:
         pass
+    await quu.answer(sio)
     print(sio)
-    return sio
+    #return sio
     
         
 '''except Exception as er:
