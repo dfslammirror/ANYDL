@@ -133,4 +133,6 @@ async def button(bot, update):
     elif "=" in cb_data:
         await ddl_call_back(bot, update)
     elif "progress" in cb_data:
-        await ytdl_progress(bot, update)
+        siio = ytdl_progress(bot, update)
+        def answer(bot, callback_query):
+          callback_query.answer(f"Downloade Size: '{siio}'", show_alert=True)
