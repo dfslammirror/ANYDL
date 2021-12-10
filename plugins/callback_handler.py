@@ -25,14 +25,14 @@ async def ytdl_progress(bot, update):
             fp = os.path.join(path, f)
             smze += os.path.getsize(fp)
             sio = humanbytes(smze)
+    
     return sio
     
         
-    '''except Exception as er:
-      await bot.answer(f'Error : {er}')
-      print(er)
-      pass
-    print(smze)
-    sio = humanbytes(smze)
-    await bot.answer(f"Downloaded : {sio}", True)'''
+'''except Exception as er:
+  await bot.answer(f'Error : {er}')
+  print(er)
+  pass  print(smze)
+sio = humanbytes(smze)
+await bot.answer(f"Downloaded : {sio}", True)'''
 
