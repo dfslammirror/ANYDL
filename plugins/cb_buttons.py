@@ -132,7 +132,7 @@ async def button(bot, update):
         await youtube_dl_call_back(bot, update)
     elif "=" in cb_data:
         await ddl_call_back(bot, update)
-    elif "progress" in cb_data:
+    '''elif "progress" in cb_data:
         siio = ytdl_progress(bot, update)
         def answer(bot, callback_query):
-          callback_query.answer(f"Downloade Size: '{siio}'", show_alert=True)
+          callback_query.answer(f"Downloade Size: '{siio}'", show_alert=True)'''
