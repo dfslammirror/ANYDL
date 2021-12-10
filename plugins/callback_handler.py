@@ -16,18 +16,23 @@ async def ytdl_progress(bot, update):
     d_directory = Config.DOWNLOAD_LOCATION + '/' + str(update.message.message_id)
     print(d_directory)
     smze = 0
-    try:
-      for path, dirs, files in os.walk(d_directory):
-        for f in files:
-          fp = os.path.join(path, f)
-          smze += os.path.getsize(fp)
+    if not os.path.isdir(d_directory):
+      sio = f'This file is not present in the directory!'
+    else:
+      try:
+        for path, dirs, files in os.walk(d_directory):
+          for f in files:
+            fp = os.path.join(path, f)
+            smze += os.path.getsize(fp)
+            sio = humanbytes(smze)
+    return sio
+    
         
-      await bot.answer(f"Downloaded : {sio}", True)
-    except Exception as er:
+    '''except Exception as er:
       await bot.answer(f'Error : {er}')
       print(er)
       pass
     print(smze)
     sio = humanbytes(smze)
-    await bot.answer(f"Downloaded : {sio}", True)
+    await bot.answer(f"Downloaded : {sio}", True)'''
 
