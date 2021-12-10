@@ -12,12 +12,12 @@ else:
     from config import Config
 
 @pyrogram.Client.on_callback_query(filters.regex(r'^progress$'))
-async def ytdl_progress(bot, quu: CallbackQuery):
+async def ytdl_progress(bot, cb: CallbackQuery):
     d_directory = Config.DOWNLOAD_LOCATION + '/' + str(update.message.message_id)
     print(d_directory)
     smze = 0
     if not os.path.isdir(d_directory):
-      sio = f'This file is not present in the directory!'
+      siio = f'This file is not present in the directory!'
     else:
       try:
         for path, dirs, files in os.walk(d_directory):
@@ -25,10 +25,11 @@ async def ytdl_progress(bot, quu: CallbackQuery):
             fp = os.path.join(path, f)
             smze += os.path.getsize(fp)
             sio = humanbytes(smze)
+            siio = f"Downloaded : {sio}"
       except:
         pass
-    await quu.answer(sio)
-    print(sio)
+    await cb.answer(siio)
+    print(sio, siio)
     #return sio
     
         
