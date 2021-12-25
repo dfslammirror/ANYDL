@@ -28,7 +28,7 @@ async def ytdl_progress(bot, mm):
             siio = f"Downloaded : {sio}"
       except:
         pass
-    await cb.answer(siio)
+    await mm.answer(siio)
     #await cb.answer(f'How it is going!')
     print(sio, siio)
     #return sio
